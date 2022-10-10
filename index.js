@@ -1,11 +1,26 @@
 const chroma = require("chroma-js");
 
+// const targetColors = [
+//     "#FF57C8",
+//     "#BF6EE0",
+//     "#8D85EA",
+//     "#78EBC7",
+//     "#43B5C2"
+// ];
+
 const targetColors = [
-    "#9966FF",
-    "#0055BC",
-    "#00A1C2",
-    "#ED6804",
-    "#B3063D"
+    "#E69F2E",
+    "#FCCDE5",
+    "#009E73",
+    "#AAD69C",
+    "#0072B2",
+    "#9EBCDA",
+    "#F46D43",
+    "#FF57C8",
+    "#BF6EE0",
+    "#8D85EA",
+    "#78EBC7",
+    "#43B5C2",
 ];
 
 // random from array
@@ -258,10 +273,10 @@ const cost = (state) => {
 };
 
 // the simulated annealing algorithm
-const optimize = (n = 5) => {
+const optimize = () => {
     const colors = [];
-    for (let i = 0; i < n; i++) {
-        colors.push(randomColor());
+    for (let i = 0; i < targetColors.length; i++) {
+        colors.push(chroma(targetColors[i]));
     }
 
     const startColors = Array.from(colors);
@@ -289,7 +304,7 @@ const optimize = (n = 5) => {
                 colors[i] = newColors[i];
             }
         }
-        console.log(`Current cost: ${cost(colors)}`);
+        // console.log(`Current cost: ${cost(colors)}`);
 
         // decrease temperature
         temperature *= coolingRate;
@@ -304,4 +319,4 @@ Cost difference: ${cost(colors) - startCost}`);
     return colors;
 };
 
-optimize(8);
+optimize();
